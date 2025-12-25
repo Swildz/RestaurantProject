@@ -1,14 +1,12 @@
-<?php // Rememeber to change the username,password and database name to acutal values
-define('DB_HOST','localhost');
-define('DB_USER','root'); 
-define('DB_PASS','');
-define('DB_NAME','restaurantDB');
+<?php
 
-//Create Connection
-$link = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
+$host = getenv('DB_HOST');      // db
+$user = getenv('DB_USERNAME'); // restaurant_user
+$pass = getenv('DB_PASSWORD');
+$db   = getenv('DB_DATABASE');
 
-//Check COnnection
-if($link->connect_error){ //if not Connection
-die('Connection Failed'.$link->connect_error);//kills the Connection OR terminate execution
+$link = new mysqli($host, $user, $pass, $db);
+
+if ($link->connect_error) {
+    die("Database connection failed: " . $link->connect_error);
 }
-?>

@@ -50,17 +50,17 @@ require_once '../config.php'; // Include your database configuration
                         // Calculate the end time of the 20-minute range
                         $startTime = date("H:i:s", strtotime($endTime) - (20 * 60));
                         // Check if there's a reservation within the 20-minute range
-                        $reservationQuery = "SELECT * FROM reservations WHERE table_id = $table_id AND reservation_date = '$selectedDate' AND reservation_time BETWEEN '$startTime' AND '$endTime'";
+                        $reservationQuery = "SELECT * FROM Reservations WHERE table_id = $table_id AND reservation_date = '$selectedDate' AND reservation_time BETWEEN '$startTime' AND '$endTime'";
                         $reservationResult = mysqli_query($link, $reservationQuery);
                         
-                        //Show all reservations
+                        //Show all Reservations
                         
                         //
 
                         if ($latestBillData) {
                             $latestBillID = $latestBillData['bill_id'];
 
-                            $sqlBillItems = "SELECT * FROM bill_items WHERE bill_id = $latestBillID";
+                            $sqlBillItems = "SELECT * FROM Bill_Items WHERE bill_id = $latestBillID";
                             $result2 = $link->query($sqlBillItems);
                             if ($result2 && mysqli_num_rows($result2) > 0) {
                                 $billItemColor = 'rgb(216, 0, 50)'; // Bill has associated bill items (red)

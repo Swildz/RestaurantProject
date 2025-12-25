@@ -1,7 +1,7 @@
 <?php
 // Include your database connection code here
-require_once '../config.php';
 session_start();
+require_once '../config.php';
 
 // Define variables for email and password
 $email = $password = "";

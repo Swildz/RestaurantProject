@@ -4,7 +4,7 @@ require_once '../config.php';
 $bill_id = $_POST['bill_id'];
 $item_id = $_POST['item_id'];
 
-// Check if the item already exists in the bill_items table
+// Check if the item already exists in the Bill_Items table
 $existingItemQuery = "SELECT * FROM Bill_Items WHERE bill_id = $bill_id AND item_id = '$item_id'";
 $existingItemResult = mysqli_query($link, $existingItemQuery);
 

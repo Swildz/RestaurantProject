@@ -1,90 +1,57 @@
-## Restaurant POS and Website
+## 📦 Submission Deliverables
 
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/homehomepage.png?raw=true)
+This submission includes a complete deployment package that fulfills all assessment requirements.  
+The following components and evidences are provided:
 
-**Built with these:** 
-<p align="left">
-   <a href="#">
-      <img alt="HTML5" src="https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white"/>
-      <img alt="CSS3" src="https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white"/>
-      <img alt="MySQL" src="https://img.shields.io/badge/mysql-%2300f.svg?&style=for-the-badge&logo=mysql&logoColor=white"/>
-      <img alt="Php" src="https://img.shields.io/badge/php-474a8a?style=for-the-badge&logo=php&logoColor=white" />
-      <img alt="JavaScript" src="https://img.shields.io/badge/javascript%20-%23F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=black"/>
-   </a>
-</p>
+---
 
-**Using:** Php 7.4
+### 📘 Documentation
 
-**Features:**
-* **Customer Side (customerSide Folder):** Stores the website and allows customers to:
-    * Make reservations
-    * Register for accounts
-    * View profile points
-* **Staff Side (adminSide Folder):** Stores the panels and allows staff to:
-    * Take orders
-    * Send orders to the kitchen
-    * Process payments
-    * Print receipts
-    * Manage CRUD operations
-    * View user preferences
-    * Download reports
-    * View charts and graph
+- **Detailed README.md**  
+  Contains complete setup, configuration, and execution instructions, including:
+  - Prerequisites
+  - Environment configuration
+  - Build and run steps using Docker Compose
+  - Application access and validation
+  - Monitoring and logging setup
+  - Troubleshooting guidelines
 
+---
 
+### 📸 Screenshots Evidence
 
-**Steps to run the project locally for Netbeans Manually:**
+The following screenshots are included as proof of successful deployment and execution:
 
-1. Open XAMPP, start Apache and MySQL.
-2. Create a new project in Netbeans named `RestaurantProject`.
-3. Under categories, select PHP, the PHP Application under Projects.
-4. In Run Configuration, the "Run As" should be Local Web Site. (If your using Xampp).
-5. Then Finish.
-6. Delete the `setup_completed.flag` file in the RestaurantProject-main. (Extracted version)
-7. Copy all the folders and files (adminSide, customerSide, index.php, and restaurantDB.txt) from the RestaurantProject-main into the `Source Files` directory.
-8. Make sure there is no database named `restaurantdb`.
-9. Run the project.
+- **Running Docker Containers**  
+  Evidence showing all required containers running successfully using `docker ps`.
 
-## Example accounts
+- **Application Interface**  
+  Browser access to the Restaurant application running on port 80.
 
-| Role | Email | Password |
-|---|---|---|
-| Customer | dadsvawvid@gmail.com | david4pass |
-| Customer | zoe@gmail.com | passworddef |
-| Customer | jackie@gmail.com | passwordstu |
-| Staff | 1 | password123 |
-| Staff | 10 | davidpa2ss |
-| Staff | 7 | robertpass |
-| Admin | 99999 | 12345 |
+- **Database Terminal**  
+  Successful connection to the MySQL database using the application user and validation of database tables.
 
-## Screenshots
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/homehomepage.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/register.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/Login.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/homepageloggedin.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/reservation.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/stafflogin.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/postable.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/orderitembeforepay.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/addmemberidandreservationid.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/cashpaid.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/cardpayment.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/billdpanel.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/tablepanel.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/kitchenpanel.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/salespanel.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/statisticspanel.png?raw=true)
-![alt text](https://github.com/Brynlai/RestaurantProject/blob/main/RestaurantProjectImages/profilespanel.png?raw=true)
+- **Grafana Dashboard**  
+  Grafana interface displaying application logs and/or monitoring data via Loki.
 
+---
 
+### 📑 Deployment Report (PDF / Presentation)
 
-## Contributors
+A final deployment report is provided in **PDF and/or presentation format**, summarizing the following:
 
-| Name | Github |
-|---|---|
-| Bryan | https://github.com/BryanTheLai |
-| Yong | https://github.com/ahhyang |
-| Kevin | https://github.com/kevin07212004 |
-| Edzer | https://github.com/edsaur |
+- **Setup Steps**  
+  Overview of the deployment flow from repository cloning to application runtime.
 
-## If you want to put a password for the database, change the config.php files.
+- **Configuration Details**  
+  Explanation of Dockerfile, Docker Compose services, environment variables, and network setup.
 
+- **Monitoring Implementation**  
+  Description of Grafana, Loki, and Promtail integration for centralized logging and monitoring.
+
+- **Issues Encountered and Resolutions**  
+  Summary of technical issues faced during deployment and the solutions applied.
+
+---
+
+All deliverables are organized, accessible, and fully functional as required for assessment review.

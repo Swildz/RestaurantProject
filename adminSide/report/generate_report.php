@@ -2,7 +2,8 @@
 require('../posBackend/fpdf186/fpdf.php'); // Include the FPDF library
 // Include your database configuration
 require_once '../config.php';
-function executeQuery($link, $sql) {
+function executeQuery($link, $sql)
+{
     $result = $link->query($sql);
     if ($result === false) {
         echo "Error: " . $link->error;
@@ -13,7 +14,8 @@ function executeQuery($link, $sql) {
 
 // Function to retrieve revenue breakdown by item category
 // Function to retrieve revenue breakdown by item category
-function getCategoryRevenue($link, $sql) {
+function getCategoryRevenue($link, $sql)
+{
     return executeQuery($link, $sql);
 }
 class PDF extends FPDF
@@ -50,7 +52,7 @@ class PDF extends FPDF
     {
         // Column widths
         $w = array(90, 90);
-        
+
         // Header
         $this->SetFillColor(200, 200, 200);
         $this->SetFont('Arial', 'B');
@@ -58,7 +60,7 @@ class PDF extends FPDF
             $this->Cell($w[$i], 10, $header[$i], 1, 0, 'C', true);
         }
         $this->Ln();
-        
+
         // Data
         $this->SetFont('Arial', '');
         foreach ($data as $row) {
@@ -68,7 +70,7 @@ class PDF extends FPDF
             $this->Ln();
         }
     }
-    
+
     function CustomTableThreeColumn($header, $data)
     {
         $this->SetFont('Arial', 'B', 12);
@@ -85,26 +87,25 @@ class PDF extends FPDF
             $this->Ln();
         }
     }
-    
+
     function CustomTableFourColumn($header, $data)
-{
-    $columnWidths = array(30, 40, 50, 70); // Adjust the column widths as needed
+    {
+        $columnWidths = array(30, 40, 50, 70); // Adjust the column widths as needed
 
-    $this->SetFont('Arial', 'B', 12);
-    for ($i = 0; $i < count($header); $i++) {
-        $this->Cell($columnWidths[$i], 10, $header[$i], 1);
-    }
-    $this->Ln();
-
-    $this->SetFont('Arial', '', 12);
-    foreach ($data as $row) {
-        for ($i = 0; $i < count($row); $i++) {
-            $this->Cell($columnWidths[$i], 10, $row[$i], 1);
+        $this->SetFont('Arial', 'B', 12);
+        for ($i = 0; $i < count($header); $i++) {
+            $this->Cell($columnWidths[$i], 10, $header[$i], 1);
         }
         $this->Ln();
-    }
-}
 
+        $this->SetFont('Arial', '', 12);
+        foreach ($data as $row) {
+            for ($i = 0; $i < count($row); $i++) {
+                $this->Cell($columnWidths[$i], 10, $row[$i], 1);
+            }
+            $this->Ln();
+        }
+    }
 }
 
 $pdf = new PDF();
@@ -113,27 +114,45 @@ $pdf = new PDF();
 $pdf->AddPage();
 
 // Get monthly revenue breakdown 
-$kitchenQuery = "SELECT 
+// $kitchenQuery = "SELECT 
+//     CONCAT(YEAR(time_ended), '-', LPAD(MONTH(time_ended), 2, '0')) AS year_and_month,
+//     COUNT(*) AS total_items_cooked,
+//     SUM(quantity) AS total_quantity,
+//     AVG(TIMESTAMPDIFF(MINUTE, time_submitted, time_ended)) AS average_cook_time
+
+// FROM 
+//     Kitchen
+// WHERE 
+//     YEAR(time_ended) = YEAR(NOW()) AND MONTH(time_ended) BETWEEN 1 AND 12
+// GROUP BY 
+//     YEAR(time_ended), MONTH(time_ended);
+// ";
+
+$kitchenQuery = "
+SELECT 
     CONCAT(YEAR(time_ended), '-', LPAD(MONTH(time_ended), 2, '0')) AS year_and_month,
     COUNT(*) AS total_items_cooked,
     SUM(quantity) AS total_quantity,
     AVG(TIMESTAMPDIFF(MINUTE, time_submitted, time_ended)) AS average_cook_time
-    
 FROM 
     Kitchen
 WHERE 
-    YEAR(time_ended) = YEAR(NOW()) AND MONTH(time_ended) BETWEEN 1 AND 12
+    YEAR(time_ended) = YEAR(NOW())
 GROUP BY 
-    YEAR(time_ended), MONTH(time_ended);
+    YEAR(time_ended), 
+    MONTH(time_ended)
+ORDER BY 
+    YEAR(time_ended), 
+    MONTH(time_ended);
 ";
 
 $kitchenResult = getCategoryRevenue($link, $kitchenQuery);
 // Display the revenue breakdown by item category in a tabular format
 $pdf->ChapterTitle('Kitchen Data Monthly');
-$header = array('Month','Items Cooked' , 'Total Quantity', 'Average Cook Time in Minutes');
+$header = array('Month', 'Items Cooked', 'Total Quantity', 'Average Cook Time in Minutes');
 $data = array();
 while ($row = mysqli_fetch_assoc($kitchenResult)) {
-    $data[] = array($row['year_and_month'],$row['total_items_cooked'] , $row['total_quantity'], $row['average_cook_time']);
+    $data[] = array($row['year_and_month'], $row['total_items_cooked'], $row['total_quantity'], $row['average_cook_time']);
 }
 $pdf->CustomTableFourColumn($header, $data);
 
@@ -248,7 +267,7 @@ $dailySQL = "SELECT DATE(Bills.bill_time) AS date,DAY(Bills.bill_time) AS day, S
 $dailyCategoryRevenue = getCategoryRevenue($link, $dailySQL);
 // Display the revenue breakdown by item category in a tabular format
 $pdf->ChapterTitle('Daily Revenue Breakdown');
-$header = array('Date','Day' , 'Revenue (RM)');
+$header = array('Date', 'Day', 'Revenue (RM)');
 $data = array();
 while ($row = mysqli_fetch_assoc($dailyCategoryRevenue)) {
     $data[] = array($row['date'], $row['day'], $row['daily_category_revenue']);
@@ -267,7 +286,7 @@ $weeklySQL = "SELECT CONCAT(YEAR(Bills.bill_time), '-', MONTH(Bills.bill_time)) 
 $weeklyCategoryRevenue = getCategoryRevenue($link, $weeklySQL);
 // Display the revenue breakdown by item category in a tabular format
 $pdf->ChapterTitle('Weekly Revenue Breakdown');
-$header = array('Date','Week' , 'Revenue (RM)');
+$header = array('Date', 'Week', 'Revenue (RM)');
 $data = array();
 while ($row = mysqli_fetch_assoc($weeklyCategoryRevenue)) {
     $data[] = array($row['year'], $row['week'], $row['weekly_category_revenue']);
@@ -287,7 +306,7 @@ $monthlySQL = "SELECT CONCAT(YEAR(Bills.bill_time), '-', MONTH(Bills.bill_time))
 $monthlyCategoryRevenue = getCategoryRevenue($link, $monthlySQL);
 // Display the revenue breakdown by item category in a tabular format
 $pdf->ChapterTitle('Monthly Revenue Breakdown');
-$header = array('Date','Month' , 'Revenue (RM)');
+$header = array('Date', 'Month', 'Revenue (RM)');
 $data = array();
 while ($row = mysqli_fetch_assoc($monthlyCategoryRevenue)) {
     $data[] = array($row['year'], $row['month'], $row['monthly_category_revenue']);
@@ -352,7 +371,7 @@ $yearlyCategoryRevenue = getCategoryRevenue($link, $yearlySQL);
 
 // Display the revenue breakdown by item category in a tabular format
 $pdf->ChapterTitle('Daily Revenue Breakdown by Item Category');
-$header = array('Date','Day' , 'Item Category', 'Revenue (RM)');
+$header = array('Date', 'Day', 'Item Category', 'Revenue (RM)');
 $data = array();
 while ($row = mysqli_fetch_assoc($dailyCategoryRevenue)) {
     $data[] = array($row['date'], $row['day'], $row['item_category'], $row['daily_category_revenue']);
@@ -364,7 +383,7 @@ $pdf->AddPage();
 $pdf->Ln();
 // Display the revenue breakdown by item category in a tabular format
 $pdf->ChapterTitle('Weekly Revenue Breakdown by Item Category');
-$header = array('Date','Week' , 'Item Category', 'Revenue (RM)');
+$header = array('Date', 'Week', 'Item Category', 'Revenue (RM)');
 $data = array();
 while ($row = mysqli_fetch_assoc($weeklyCategoryRevenue)) {
     $data[] = array($row['year'], $row['week'], $row['item_category'], $row['weekly_category_revenue']);
@@ -375,7 +394,7 @@ $pdf->Ln();
 $pdf->AddPage();
 // Display the revenue breakdown by item category in a tabular format
 $pdf->ChapterTitle('Monthly Revenue Breakdown by Item Category');
-$header = array('Date','Month' , 'Item Category', 'Revenue (RM)');
+$header = array('Date', 'Month', 'Item Category', 'Revenue (RM)');
 $data = array();
 while ($row = mysqli_fetch_assoc($monthlyCategoryRevenue)) {
     $data[] = array($row['year'], $row['month'], $row['item_category'], $row['monthly_category_revenue']);
@@ -477,4 +496,3 @@ $pdf->CustomTable(array('Category', 'Quantity'), $menuItemNoOrdersResultData);
 
 
 $pdf->Output('RevenueReport.pdf', 'D');
-?>

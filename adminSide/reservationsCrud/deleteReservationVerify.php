@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($uniqueString == "9999912345") {
         echo ' Correct';
-        header("Location: ../reservationsCrud/deleteReservation.php?id=".$table_id ."");
+        header("Location: ../ReservationsCrud/deleteReservation.php?id=".$table_id ."");
     } else {
         echo '<script>alert("Incorrect ID or Password!")</script>';
     }

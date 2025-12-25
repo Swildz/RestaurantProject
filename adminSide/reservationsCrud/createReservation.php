@@ -6,9 +6,9 @@ session_start(); // Ensure session is started
 <?php
 require_once '../config.php';
 
-$reservationStatus = $_GET['reservation'] ?? null;
+$Reservationstatus = $_GET['reservation'] ?? null;
 $message = '';
-if ($reservationStatus === 'success') {
+if ($Reservationstatus === 'success') {
     $message = "Reservation successful";
 }
 $head_count = $_GET['head_count'] ?? 1;

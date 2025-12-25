@@ -1,9 +1,6 @@
 <?php
-session_start(); // Ensure session is started
-?>
-<?php
+session_start();
 require_once "../config.php";
-
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

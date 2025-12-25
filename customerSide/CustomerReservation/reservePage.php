@@ -1,8 +1,7 @@
 <?php
-require_once '../config.php';
-
 // Start the session
 session_start();
+require_once '../config.php';
 ?>
 
 
@@ -42,9 +41,9 @@ session_start();
 </head>
 <body>
     <?php
-        $reservationStatus = $_GET['reservation'] ?? null;
+        $Reservationstatus = $_GET['reservation'] ?? null;
         $message = '';
-        if ($reservationStatus === 'success') {
+        if ($Reservationstatus === 'success') {
             $message = "Reservation successful";
             $reservation_id = $_GET['reservation_id'] ?? null;
             echo '<a class="nav-link" href="../home/home.php#hero">' .

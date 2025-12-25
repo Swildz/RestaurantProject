@@ -68,19 +68,19 @@ $totalRevenueThisMonth = $totalRevenueThisMonthRow['total_revenue'];
                         
                         <tr>
                             <th scope="row">Total Revenue Today</th>
-                            <td><?php echo number_format($totalRevenueToday, 2); ?></td>
+                            <td><?php echo number_format((float)$totalRevenueToday, 2); ?></td>
                         </tr>
                         <tr>
                             <th scope="row">Total Revenue This Week</th>
-                            <td><?php echo number_format($totalRevenueThisWeek, 2); ?></td>
+                            <td><?php echo number_format((float)$totalRevenueThisWeek, 2); ?></td>
                         </tr>
                         <tr>
                             <th scope="row">Total Revenue This Month</th>
-                            <td><?php echo number_format($totalRevenueThisMonth, 2); ?></td>
+                            <td><?php echo number_format((float)$totalRevenueThisMonth, 2); ?></td>
                         </tr>
                         <tr>
                             <th scope="row">Total Revenue</th>
-                            <td><?php echo number_format($totalRevenue, 2); ?></td>
+                            <td><?php echo number_format((float)$totalRevenue, 2); ?></td>
                         </tr>
                     </tbody>
                 </table>

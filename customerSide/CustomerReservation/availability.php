@@ -7,8 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $head_count = $_GET["head_count"];  // Number of people
     $selectedTime = date("H:i:s", strtotime($_GET["reservation_time"]));
 
-    // Query to get all reservations for the selected date and time
-    $reservedQuery = "SELECT * FROM reservations WHERE reservation_date = '$selectedDate' AND reservation_time = '$selectedTime'";
+    // Query to get all Reservations for the selected date and time
+    $reservedQuery = "SELECT * FROM Reservations WHERE reservation_date = '$selectedDate' AND reservation_time = '$selectedTime'";
     $reservedResult = mysqli_query($link, $reservedQuery);
 
     // Initialize an array to store reserved table IDs
@@ -55,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     } else {
         $reservationLink = "reservePage.php?reservation_date=$selectedDate&head_count=$head_count&reservation_time=$selectedTime&reserved_table_id=0";
         header("Location: $reservationLink");
+        exit(); 
     }
     
 

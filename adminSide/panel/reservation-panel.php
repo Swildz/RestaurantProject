@@ -12,7 +12,7 @@ require_once '../posBackend/checkIfLoggedIn.php';
             <div class="m-50">
                 <div class="mt-5 mb-3">
                     <h2 class="pull-left">Reservation Details</h2>
-                    <a href="../reservationsCrud/createReservation.php" class="btn btn-outline-dark"><i class="fa fa-plus"></i> Add Reservation</a>
+                    <a href="../ReservationsCrud/createReservation.php" class="btn btn-outline-dark"><i class="fa fa-plus"></i> Add Reservation</a>
                 </div>
                 <div class="mb-3">
                     <form method="POST" action="#">
@@ -33,19 +33,19 @@ require_once '../posBackend/checkIfLoggedIn.php';
                 <?php
                 // Include config file
                 require_once "../config.php";
-                $sql = "SELECT * FROM reservations ORDER BY reservation_id;";
+                $sql = "SELECT * FROM Reservations ORDER BY reservation_id;";
 
                 if (isset($_POST['search'])) {
                     if (!empty($_POST['search'])) {
                         $search = $_POST['search'];
 
-                        $sql = "SELECT * FROM reservations WHERE reservation_date LIKE '%$search%' OR reservation_id LIKE '%$search%' OR customer_name LIKE '%$search%'";
+                        $sql = "SELECT * FROM Reservations WHERE reservation_date LIKE '%$search%' OR reservation_id LIKE '%$search%' OR customer_name LIKE '%$search%'";
                     } else {
-                        // Default query to fetch all reservations
-                        $sql = "SELECT * FROM reservations ORDER BY reservation_date DESC, reservation_time DESC;";
+                        // Default query to fetch all Reservations
+                        $sql = "SELECT * FROM Reservations ORDER BY reservation_date DESC, reservation_time DESC;";
                     }
                 } else{
-                    $sql = "SELECT * FROM reservations ORDER BY reservation_date DESC, reservation_time DESC;";
+                    $sql = "SELECT * FROM Reservations ORDER BY reservation_date DESC, reservation_time DESC;";
 
                 }
                 
@@ -76,11 +76,11 @@ require_once '../posBackend/checkIfLoggedIn.php';
                             echo "<td>" . $row['head_count'] . "</td>";
                             echo "<td>" . $row['special_request'] . "</td>";
                             echo "<td>";
-                            echo '<a href="../reservationsCrud/deleteReservationVerify.php?id='. $row['reservation_id'] .'" title="Delete Record" data-toggle="tooltip" '
+                            echo '<a href="../ReservationsCrud/deleteReservationVerify.php?id='. $row['reservation_id'] .'" title="Delete Record" data-toggle="tooltip" '
                                    . 'onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to delete this Reservation?\n\nThis will alter other modules related to this Reservation!\n\')"><span class="fa fa-trash text-black"></span></a>';
                             echo "</td>";
                             echo "<td>";
-                            echo '<a href="../reservationsCrud/reservationReceipt.php?reservation_id='. $row['reservation_id'] .'" title="Receipt" data-toggle="tooltip"><span class="fa fa-receipt text-black"></span></a>';
+                            echo '<a href="../ReservationsCrud/reservationReceipt.php?reservation_id='. $row['reservation_id'] .'" title="Receipt" data-toggle="tooltip"><span class="fa fa-receipt text-black"></span></a>';
                             echo "</td>";
                             echo "</tr>";
                         }
