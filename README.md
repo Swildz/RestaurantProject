@@ -25,14 +25,23 @@ The following screenshots are included as proof of successful deployment and exe
 - **Running Docker Containers**  
   Evidence showing all required containers running successfully using `docker ps`.
 
+    ![Structur Container RestaurantProject](dokumentasi/container-restaurant.png)
+    ![Docker Ps](dokumentasi/docker-ps.png)
+
 - **Application Interface**  
-  Browser access to the Restaurant application running on port 80.
+  Browser access to the Restaurant application running on port 8088.
+    ![Dashboard App](dokumentasi/run-app2.png)
+    ![Home Staff](dokumentasi/run-app1.png)
 
 - **Database Terminal**  
   Successful connection to the MySQL database using the application user and validation of database tables.
+    ![Database Login](dokumentasi/db_run_1.png)
+    ![Show Database](dokumentasi/db_run_2.png)
 
 - **Grafana Dashboard**  
   Grafana interface displaying application logs and/or monitoring data via Loki.
+    ![Grafana Dash - RestoranProject](dokumentasi/grafana.png)
+    ![Grafana Dash - RestoranProject - Loki](dokumentasi/grafana_loki_2.png)
 
 ---
 
