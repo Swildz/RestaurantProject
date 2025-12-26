@@ -49,7 +49,7 @@ The following screenshots are included as proof of successful deployment and exe
 
 A final deployment report is provided in **PDF and/or presentation format**, summarizing the following:
 
-![PDF File deployment](dokumentasi/Deployment_Report_Docker_Monitoring.pptx)
+[📄 Final deployment report (PDF)](dokumentasi/Deployment_Report_Docker_Monitoring.pdf)
 
 - **Setup Steps**  
   Overview of the deployment flow from repository cloning to application runtime.
